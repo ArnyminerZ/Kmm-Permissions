@@ -53,4 +53,8 @@ class AndroidLocationHelper(
             }
         }
     }
+
+    override suspend fun fetchCurrentLocation(): LocationRequestResult {
+        TODO("Not yet implemented")
+    }
 }

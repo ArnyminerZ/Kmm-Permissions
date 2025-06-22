@@ -68,6 +68,7 @@ kotlin {
                 implementation(project(":pdfviewer"))
                 implementation(project(":camera"))
                 implementation(project(":camera-qr"))
+                implementation(project(":geocoder"))
             }
         }
 

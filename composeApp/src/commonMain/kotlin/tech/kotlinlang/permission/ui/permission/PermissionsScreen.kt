@@ -25,6 +25,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.launch
+import tech.kotlinlang.geocoder.GeocoderData
+import tech.kotlinlang.geocoder.GeocoderHelper
 import tech.kotlinlang.permission.HelperHolder
 import tech.kotlinlang.permission.Permission
 import tech.kotlinlang.permission.location.LocationRequestResult
@@ -237,15 +239,20 @@ private fun LocationFetchContent(modifier: Modifier = Modifier) {
     ) {
         val scope = rememberCoroutineScope()
         val locationHelper = remember { HelperHolder.getLocationHelperInstance() }
+        val geocoderHelper = remember { GeocoderHelper.getInstance() }
 
         var locationRequestResult by remember {
             mutableStateOf<LocationRequestResult?>(null)
         }
+        var geoCoderData by remember { mutableStateOf<GeocoderData?>(null) }
 
         when (locationRequestResult) {
             is LocationRequestResult.LocationData -> {
                 val currentResult = locationRequestResult as LocationRequestResult.LocationData
                 Text("Fetched Last known location: ${currentResult.latitude}, ${currentResult.longitude}")
+                if (geoCoderData != null) {
+                    Text("Country ${geoCoderData?.country}, State: ${geoCoderData?.state}, City: ${geoCoderData?.city}")
+                }
             }
 
             LocationRequestResult.NoLastLocationFound -> {
@@ -261,7 +268,12 @@ private fun LocationFetchContent(modifier: Modifier = Modifier) {
                 Button(
                     onClick = {
                         scope.launch {
-                            locationRequestResult = locationHelper.fetchLastKnownLocation()
+                            val result = locationHelper.fetchLastKnownLocation()
+                            locationRequestResult = result
+
+                            if (result !is LocationRequestResult.LocationData) return@launch
+                            val data = geocoderHelper.fetchGeocoderData(result.latitude, result.longitude)
+                            geoCoderData = data
                         }
                     },
                 ) {

@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [Unreleased]
+
+### Added
+- Add logic to use geocoder in android
+
+---
+
 ## [0.12.2] - 2025-05-29
 
 ### Added

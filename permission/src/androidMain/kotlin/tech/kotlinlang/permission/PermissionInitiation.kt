@@ -49,7 +49,7 @@ class PermissionInitiation private constructor() {
             HelperHolder.clear()
         }
 
-        internal fun getInstance(): PermissionInitiation {
+        fun getInstance(): PermissionInitiation {
             return permissionInitiation ?: throw NotImplementedError(
                 message = "Please add 'PermissionInitiation.setActivity(this)' in your MainActivity during onCreate."
             )
