@@ -6,6 +6,7 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 - Add logic to use geocoder in android
+- Add logic to use geocoder in ios
 
 ---
 
