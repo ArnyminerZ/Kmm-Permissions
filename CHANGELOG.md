@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [Unreleased]
+
+### Added
+- Add logic to provide incrementer value in Quantity Changer in UI module
+
+---
+
 ## [0.13.0] - 2025-06-23
 
 ### Added
