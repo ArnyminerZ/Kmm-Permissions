@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## [Unreleased]
+## [0.14.0] - 2025-10-05
 
 ### Added
 - Add logic to provide incrementer value in Quantity Changer in UI module
