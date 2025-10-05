@@ -34,6 +34,8 @@ data class QuantityChangerConfig(
     val gap: Dp,
     val flipShape: Boolean,
     val incrementer: Int,
+    val maximum: Int,
+    val minimum: Int,
 ) {
     companion object {
         @get:ReadOnlyComposable
@@ -56,7 +58,9 @@ data class QuantityChangerConfig(
                 prevIcon = Icons.Default.Delete,
                 gap = 4.dp,
                 flipShape = false,
-                incrementer = 1
+                incrementer = 1,
+                minimum = 0,
+                maximum = Int.MAX_VALUE,
             )
     }
 }

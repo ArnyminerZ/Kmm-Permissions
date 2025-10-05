@@ -87,7 +87,12 @@ fun QuantityChanger(
                         onPress = {
                             val job = scope.launch {
                                 while (true) {
-                                    onQuantityChange(previousQuantity - quantityChangerConfig.incrementer)
+                                    val newQuantity = previousQuantity - quantityChangerConfig.incrementer
+                                    if (newQuantity < quantityChangerConfig.minimum) {
+                                        onQuantityChange(quantityChangerConfig.minimum)
+                                        break
+                                    }
+                                    onQuantityChange(newQuantity)
                                     delay(250)
                                 }
                             }
@@ -139,6 +144,11 @@ fun QuantityChanger(
                         onPress = {
                             val job = scope.launch {
                                 while (true) {
+                                    val newQuantity = previousQuantity + quantityChangerConfig.incrementer
+                                    if (newQuantity > quantityChangerConfig.maximum) {
+                                        onQuantityChange(quantityChangerConfig.maximum)
+                                        break
+                                    }
                                     onQuantityChange(previousQuantity + quantityChangerConfig.incrementer)
                                     delay(250)
                                 }
