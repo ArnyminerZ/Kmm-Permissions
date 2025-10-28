@@ -5,6 +5,7 @@ plugins {
     kotlin("multiplatform")
     id("com.android.library") // ✅ This enables the Android block
     id("com.vanniktech.maven.publish") version "0.31.0"
+    alias(libs.plugins.kotlinxSerialization) // Serialization plugin
 }
 
 kotlin {
@@ -13,6 +14,8 @@ kotlin {
     // which platforms this KMP module supports.
     // See: https://kotlinlang.org/docs/multiplatform-discover-project.html#targets
     androidTarget()
+
+    jvm("desktop")
 
     // For iOS targets, this is also where you should
     // configure native binary output. For more information, see:
@@ -71,6 +74,14 @@ kotlin {
             implementation(libs.androidx.core.ktx)
             implementation(libs.androidx.activity.compose)
             implementation(libs.gms.play.services.location)
+        }
+
+        val desktopMain by getting {
+            dependencies {
+                implementation(libs.kotlinx.serialization.json)
+                implementation(libs.ktor.client.core)
+                implementation(libs.ktor.client.okhttp)
+            }
         }
 
         iosMain.dependencies {
