@@ -5,7 +5,6 @@ plugins {
     kotlin("multiplatform")
     id("com.android.library") // ✅ This enables the Android block
     id("com.vanniktech.maven.publish") version "0.31.0"
-    alias(libs.plugins.kotlinxSerialization) // Serialization plugin
 }
 
 kotlin {
@@ -78,7 +77,6 @@ kotlin {
 
         val desktopMain by getting {
             dependencies {
-                implementation(libs.kotlinx.serialization.json)
                 implementation(libs.ktor.client.core)
                 implementation(libs.ktor.client.okhttp)
             }
